@@ -2,3 +2,6 @@
 
 # Load packages
 library(tidyverse)
+
+# Load data
+data(iris)
