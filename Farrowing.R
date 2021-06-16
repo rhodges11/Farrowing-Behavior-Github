@@ -7,4 +7,7 @@ data(iris)
 #Check dimensions of iris
 dim(iris)
 
-# Now I am on my own branch 
+# Now I am on my own branch
+
+# Creating data folder
+dir.create("data")
