@@ -1,6 +1,6 @@
 # Introduction and setting up work space ---------------------------------------------------
 
-# Code to summarize sow posture values 
+# Code to summarize sow posture values  
 # Author: Bryanna Fayne 
 # Date: June 16th, 2021
 
