@@ -19,7 +19,7 @@ rm(list = ls())
 # Reading in files and defining variables  --------------------------------
 
 # Reading in farrowing time sheet 
-farr_times <- read_xlsx("data/FarrowingTimes_All_corrected.xlsx",range = "A2:G251")     # Reading in DS10 ONLY
+farr_times <- read_xlsx("data/FarrowingTimes_All_corrected.xlsx",range = "A2:G251")     # Reading in all sow farrowing times
 
 # Making that "Stall" (sow number) column a numeric value 
 farr_times$Stall <- as.numeric(farr_times$Stall)
