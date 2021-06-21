@@ -47,7 +47,8 @@ count = 0                                                      # Counter to know
 # For Loop ----------------------------------------------------------------
 
 #pick which DS you are working with
-DSnum = 2
+
+DSnum = 1
 
 for (sownum in 1:20) {  
   t0 <- farr_times[(farr_times$Stall == sownum)&(farr_times$DS==DSnum),]        # Reads in farrowing times
