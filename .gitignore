@@ -1,3 +1,6 @@
+# Remove desktop file 
+-DESKTOP-TTENFBJ.gitignore
+
 # Ignore data files 
 data/*
 graphs/*
