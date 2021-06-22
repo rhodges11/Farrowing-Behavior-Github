@@ -102,3 +102,16 @@ dstwo
 # Write to old file 
 write_csv(behavior_counts, "behavior_counts.csv")
 
+
+# Proportion Calculations -------------------------------------------------
+
+behavior_counts %>% mutate(lying_prop = lying/count)
+behavior_counts %>% mutate(standing_prop = standing/count)
+behavior_counts %>% mutate(sitting_prop = sitting/count)
+behavior_counts %>% mutate(kneeling_prop = kneeling/count)
+behavior_counts %>% mutate(back_prop = back_to_HL/count)
+behavior_counts %>% mutate(drinking_prop = drinking/count)
+behavior_counts %>% mutate(udder_prop = udder_to_HL/count)
+behavior_counts %>% mutate(kneelingdown_prop = kneeling_down/count)
+behavior_counts %>% mutate(feeding_prop = feeding/count)
+
