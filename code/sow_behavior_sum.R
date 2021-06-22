@@ -19,7 +19,7 @@ rm(list = ls())
 # Reading in files and defining variables  --------------------------------
 
 # Reading in farrowing time sheet 
-farr_times <- read_xlsx("data/FarrowingTimes_060321.xlsx",range = "A2:G15")     # Reading in DS10 ONLY
+farr_times <- read_xlsx("data/FarrowingTimes_All_corrected.xlsx",range = "A1:G251")     # Reading in all sow farrowing times
 
 # Making that "Stall" (sow number) column a numeric value 
 farr_times$Stall <- as.numeric(farr_times$Stall)
@@ -47,13 +47,16 @@ count = 0                                                      # Counter to know
 # For Loop ----------------------------------------------------------------
 
 #pick which DS you are working with
-DSnum = 10
+
+DSnum = 2
 
 for (sownum in 1:20) {  
   t0 <- farr_times[(farr_times$Stall == sownum)&(farr_times$DS==DSnum),]        # Reads in farrowing times
   if (is_empty(t0$`Farrowing Date`)) {next}                                     # Skipping missing values
   #Figure out the first time increment we want to count from (will be t0 - 3 days)
-  raw = read_xlsx(paste("data/DS",DSnum, "/S",sownum,"_Sow.xlsx",sep=""),sheet = "Raw") # Reading each sow sheet 
+  if (file.exists(paste("C:\Users\bryfa\OneDrive\Desktop\P4 REEU\Farrowing-Behavior-Github\data\DS2\S", sownum, "_Sow.xlsx", sep = ""))) {
+  raw = read_xlsx(paste("C:\Users\bryfa\OneDrive\Desktop\P4 REEU\Farrowing-Behavior-Github\data\DS2\S", sownum, "_Sow.xlsx", sep = ""), sheet = "Raw") # Reading each sow sheet   # Skipping sow files that do not exist 
+  }
   raw = raw[order(raw$timestamp,decreasing = FALSE),] #makes sure all the rows are in order
   tbase <- t0$timestamp - (3*24*60*60)                                          #t0 - 3days
   starttime = tbase                                                              # Saves the time the first increment starts
@@ -71,7 +74,7 @@ for (sownum in 1:20) {
         row=row+1
       } else if (tnow>tbase+(6*24*60*60)){ #if we are past the time range we want, we need to write any remaining data and can finish this sow
           if (count>0){ #if count>0, then we have some data that we need to save
-            newdata<-data.frame(DSnum,sownum, inc,starttime,lying, standing, kneeling, back_to_HL, drinking, udder_to_HL, kneeling_down, feeding,count)
+            newdata<-data.frame(DSnum,sownum, inc,starttime,lying, standing, kneeling, sitting, back_to_HL, drinking, udder_to_HL, kneeling_down, feeding,count)
             if (exists("alldata")){
               alldata<-rbind(alldata,newdata)}
             else {
@@ -139,7 +142,7 @@ for (sownum in 1:20) {
             #save all the posture/behaviors
             
             if (count>0){ #if count>0, then we have some data that we need to save
-              newdata<-data.frame(DSnum,sownum, inc,starttime,lying, standing, kneeling, back_to_HL, drinking, udder_to_HL, kneeling_down, feeding,count)
+              newdata<-data.frame(DSnum,sownum, inc,starttime,lying, standing, sitting, kneeling, back_to_HL, drinking, udder_to_HL, kneeling_down, feeding,count)
               if (exists("alldata")){
                 alldata<-rbind(alldata,newdata)}
               else {
