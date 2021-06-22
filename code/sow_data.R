@@ -82,3 +82,22 @@ ggplot(sow_sum, aes(inc, feeding)) +
   geom_point()
 
 
+# Removing bad DS2 and adding in good DS 2
+old_data <- read_csv("behavior_counts.csv")
+removed_data <- old_data %>% filter(DSnum != 2)
+
+# Check to make sure there is no DS 2
+
+removed_data %>% filter(DSnum == 2) # Nothing is there 
+
+# Add new DS 2 to this file 
+
+dstwo <- read_csv("sow_behavior_sum.csv")
+behavior_counts <- bind_rows(removed_data, dstwo)
+
+# Check to see if DS 2 is added
+behavior_counts %>% filter(DSnum == 2)
+dstwo
+
+# Write to old file 
+write_csv(behavior_counts, "behavior_counts.csv")
