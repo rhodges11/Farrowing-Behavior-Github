@@ -54,8 +54,9 @@ for (sownum in 1:20) {
   t0 <- farr_times[(farr_times$Stall == sownum)&(farr_times$DS==DSnum),]        # Reads in farrowing times
   if (is_empty(t0$`Farrowing Date`)) {next}                                     # Skipping missing values
   #Figure out the first time increment we want to count from (will be t0 - 3 days)
-  if (file.exists(paste("C:\Users\bryfa\OneDrive\Desktop\P4 REEU\Farrowing-Behavior-Github\data\DS2\S", sownum, "_Sow.xlsx", sep = ""))) {
-  raw = read_xlsx(paste("C:\Users\bryfa\OneDrive\Desktop\P4 REEU\Farrowing-Behavior-Github\data\DS2\S", sownum, "_Sow.xlsx", sep = ""), sheet = "Raw") # Reading each sow sheet   # Skipping sow files that do not exist 
+  
+  if (file.exists(paste("data/DS",DSnum, "/S",sownum,"_Sow.xlsx",sep=""))) {
+  raw = read_xlsx(paste("data/DS",DSnum, "/S",sownum,"_Sow.xlsx",sep=""), sheet = "Raw") # Reading each sow sheet   # Skipping sow files that do not exist 
   }
   raw = raw[order(raw$timestamp,decreasing = FALSE),] #makes sure all the rows are in order
   tbase <- t0$timestamp - (3*24*60*60)                                          #t0 - 3days
