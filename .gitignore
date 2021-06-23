@@ -1,5 +1,12 @@
+# Remove desktop file 
+-DESKTOP-TTENFBJ.gitignore
+
+# Ignore data files 
+data/*
+graphs/*
+
 # History files
-.Rhistory
+*.Rhistory
 .Rapp.history
 
 # Session Data files
