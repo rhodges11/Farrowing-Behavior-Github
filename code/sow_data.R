@@ -8,6 +8,7 @@ library(tidyverse)
 library(ggplot2)
 library(dplyr)
 
+# Old Data ----------------------------------------------------------------
 # Read in csv files 
 a <- read_csv("sow_behavior_sum_1_10.csv")
 b <- read_csv("sow_behavior_sum_11_20.csv")
@@ -26,6 +27,12 @@ bad_data <- behavior_counts %>%
 # Plot data to find outliers 
 
 sow_sum <- read_xlsx("data/behavior_counts+SL.xlsx")
+
+
+
+
+
+# Initial Analysis Graphs -------------------------------------------------
 
 ggplot(data = sow_sum, aes(x = inc, y = lying)) + 
   geom_smooth(fill = NA) + 
@@ -82,6 +89,9 @@ ggplot(sow_sum, aes(inc, feeding)) +
   geom_point()
 
 
+
+# Fixing Data -------------------------------------------------------------
+
 # Removing bad DS2 and adding in good DS 2
 old_data <- read_csv("behavior_counts.csv")
 removed_data <- old_data %>% filter(DSnum != 2)
@@ -103,15 +113,21 @@ dstwo
 write_csv(behavior_counts, "behavior_counts.csv")
 
 
+# Read in Data 
+behavior_counts <- read_csv("data/behavior_counts.csv")                         # This is the file without production data
+
 # Proportion Calculations -------------------------------------------------
 
-behavior_counts %>% mutate(lying_prop = lying/count)
-behavior_counts %>% mutate(standing_prop = standing/count)
-behavior_counts %>% mutate(sitting_prop = sitting/count)
-behavior_counts %>% mutate(kneeling_prop = kneeling/count)
-behavior_counts %>% mutate(back_prop = back_to_HL/count)
-behavior_counts %>% mutate(drinking_prop = drinking/count)
-behavior_counts %>% mutate(udder_prop = udder_to_HL/count)
-behavior_counts %>% mutate(kneelingdown_prop = kneeling_down/count)
-behavior_counts %>% mutate(feeding_prop = feeding/count)
+# Removing columns we are not looking at then making proportions
+target_behaviors <- behavior_counts %>% 
+  select(-kneeling,
+         -sitting,
+         -back_to_HL,
+         -drinking,
+         -udder_to_HL,
+         -kneeling_down) %>%
+  mutate(lying_prop = lying/count) %>% 
+  mutate(standing_prop = standing/count) %>% 
+  mutate(feeding_prop = feeding/count)
 
+target_behaviors
