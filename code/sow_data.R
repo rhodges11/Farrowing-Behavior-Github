@@ -10,6 +10,7 @@ library(dplyr)
 library(readxl)
 library(lubridate)
 
+
 # Old Data ----------------------------------------------------------------
 # Read in csv files 
 a <- read_csv("sow_behavior_sum_1_10.csv")
@@ -29,6 +30,8 @@ bad_data <- behavior_counts %>%
 # Plot data to find outliers 
 
 sow_sum <- read_xlsx("data/behavior_counts+SL.xlsx")
+
+
 
 # Initial Analysis Graphs -------------------------------------------------
 
@@ -151,4 +154,5 @@ behavior_hours <- behavior_counts %>%
 
 farr_hour <- behavior_farr_time %>% 
   left_join(behavior_hours, by = c("DSnum", "sownum", "farr_time_rounded" = "inc"))
+
 
