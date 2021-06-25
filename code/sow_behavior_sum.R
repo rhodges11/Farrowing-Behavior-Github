@@ -47,12 +47,14 @@ count = 0                                                      # Counter to know
 # For Loop ----------------------------------------------------------------
 
 #pick which DS you are working with
-DSnum = 1
+
+DSnum = 2
 
 for (sownum in 1:20) {  
   t0 <- farr_times[(farr_times$Stall == sownum)&(farr_times$DS==DSnum),]        # Reads in farrowing times
   if (is_empty(t0$`Farrowing Date`)) {next}                                     # Skipping missing values
   #Figure out the first time increment we want to count from (will be t0 - 3 days)
+  
   if (file.exists(paste("data/DS",DSnum, "/S",sownum,"_Sow.xlsx",sep=""))) {
   raw = read_xlsx(paste("data/DS",DSnum, "/S",sownum,"_Sow.xlsx",sep=""), sheet = "Raw") # Reading each sow sheet   # Skipping sow files that do not exist 
   }
@@ -73,7 +75,7 @@ for (sownum in 1:20) {
         row=row+1
       } else if (tnow>tbase+(6*24*60*60)){ #if we are past the time range we want, we need to write any remaining data and can finish this sow
           if (count>0){ #if count>0, then we have some data that we need to save
-            newdata<-data.frame(DSnum,sownum, inc,starttime,lying, standing, kneeling, back_to_HL, drinking, udder_to_HL, kneeling_down, feeding,count)
+            newdata<-data.frame(DSnum,sownum, inc,starttime,lying, standing, kneeling, sitting, back_to_HL, drinking, udder_to_HL, kneeling_down, feeding,count)
             if (exists("alldata")){
               alldata<-rbind(alldata,newdata)}
             else {
@@ -141,7 +143,7 @@ for (sownum in 1:20) {
             #save all the posture/behaviors
             
             if (count>0){ #if count>0, then we have some data that we need to save
-              newdata<-data.frame(DSnum,sownum, inc,starttime,lying, standing, kneeling, back_to_HL, drinking, udder_to_HL, kneeling_down, feeding,count)
+              newdata<-data.frame(DSnum,sownum, inc,starttime,lying, standing, sitting, kneeling, back_to_HL, drinking, udder_to_HL, kneeling_down, feeding,count)
               if (exists("alldata")){
                 alldata<-rbind(alldata,newdata)}
               else {
