@@ -1,3 +1,10 @@
+# Removing hidden files
+-DESKTOP-TTENFBJ*
+
+# Hiding folders
+data/*
+graphs/*
+
 # History files
 .Rhistory
 .Rapp.history
