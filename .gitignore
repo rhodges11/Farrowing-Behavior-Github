@@ -1,14 +1,9 @@
-<<<<<<< HEAD
+
 # Removing hidden files
 -DESKTOP-TTENFBJ*
 
-# Hiding folders
-=======
-# Remove desktop file 
--DESKTOP-TTENFBJ.gitignore
 
 # Ignore data files 
->>>>>>> 582b05f7d5a645f5ff0b694cdf43453aeebdff28
 data/*
 graphs/*
 
